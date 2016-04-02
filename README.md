@@ -1,2 +1,3 @@
-# sift-node-sdk
-Node.js SDK for Sift API
+# Sift
+NPM Package for Sift API
+

@@ -46,6 +46,6 @@
   "license": "MIT",
   "dependencies": {
     "crypto": "0.0.3",
-    "request": "^2.69.0"
+    "request-promise": "^2.0.1"
   }
 }

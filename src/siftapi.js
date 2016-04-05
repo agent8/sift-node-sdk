@@ -241,12 +241,15 @@ export default class SiftAPI {
    *
    * @param {string} username
    * @param {integer} siftId - ID of Sift to get from the user
+   * @param {object} params {
+   *    include_eml: 1 / 0
+   * }
    */
-  getSift(username, siftId) {
+  getSift(username, siftId, params) {
     let options = {
       method: 'GET',
       path: `/users/${username}/sifts/${siftId}`,
-      params: {},
+      params,
       data: {}
     };
     let args = values(options);

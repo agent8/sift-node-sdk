@@ -171,7 +171,7 @@ export default class SiftAPI {
    * Adds a new email connection to the Sift user
    *
    * @param {string} username
-   * @param {string} accountType - google/yahoo/llive/imap/exchange
+   * @param {string} accountType - google/yahoo/live/imap/exchange
    * @param {object} emailParams - email specific parameters
    *  see here: https://sift.easilydo.com/sift/documentation#email-connections-endpoint-add
    */
@@ -212,7 +212,7 @@ export default class SiftAPI {
    * Get list of Sifts of a user
    *
    * @param {string} username
-   * @param {object} params : {
+   * @param {object} params {
    *   limit - The maximum number of results to return. Developer can set any
    *      value between 0 to 100 and max is 100. (Defaults to 100)
    *   offset - Start the list at this offset (zero-based)

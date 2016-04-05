@@ -95,6 +95,27 @@ export default class SiftAPI {
 
   /**
    * @public
+   * Performs Discovery on the input eml file
+   *
+   * @param {string} username
+   * @param {string} emlFile - contents of the eml file
+   */
+  discovery(username, emlFile) {
+    let options = {
+      method: 'POST',
+      path: '/discovery',
+      params: {},
+      data: {
+        username,
+        email: emlFile.trim()
+      }
+    };
+    args = values(options);
+    return this._request(...args);
+  }
+
+  /**
+   * @public
    * Adds a Sift user
    *
    * @param {string} username - Username of your user

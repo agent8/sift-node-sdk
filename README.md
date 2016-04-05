@@ -29,21 +29,24 @@ var SiftAPI = require('siftapi');
 let siftapi = new SiftAPI.SiftAPI('<API_KEY>', '<API_SECRET>');
 ```
 
-Testing
--------
+Development
+-----------
 
 Rename `sensitive.example.js` to `sensitive.js` and include your `API_KEY` and
 `API_SECRET`.
 
 ```
-gulp test
-```
-
-For automated testing while developing, run
-
-```
+npm install
 gulp watch
 ```
+
+The test suite will be run
+automatically when a write action is performed on the code.
+
+Check out more at the CONTRIBUTING guide.
+
+To run the test suite only:
+`gulp test`
 
 Documentation
 -------------

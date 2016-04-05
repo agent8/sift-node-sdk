@@ -1,8 +1,8 @@
 {
   "name": "sift-node-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "EasilyDo",
-  "main": "dist/developer.js",
+  "main": "dist/siftapi.js",
   "description": "A Node.js package for EasilyDo's Sift API.",
   "contributors": [
     {
@@ -34,7 +34,6 @@
     "gulp-mocha": "^2.2.0",
     "jshint": "^2.9.1",
     "mocha": "^2.3.4",
-    "nock": "^7.7.2",
     "run-sequence": "^1.1.5"
   },
   "engine": "node >= 0.10.x",

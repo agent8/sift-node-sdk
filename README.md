@@ -32,8 +32,17 @@ siftapi = new SiftAPI.SiftAPI('<API_KEY>', '<API_SECRET>');
 Testing
 -------
 
-```javascript
+Rename `sensitive.example.js` to `sensitive.js` and include your `API_KEY` and
+`API_SECRET`.
+
+```
 gulp test
+```
+
+For automated testing while developing, run
+
+```
+gulp watch
 ```
 
 Documentation

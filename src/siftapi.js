@@ -212,12 +212,23 @@ export default class SiftAPI {
    * Get list of Sifts of a user
    *
    * @param {string} username
+   * @param {object} params : {
+   *   limit - The maximum number of results to return. Developer can set any
+   *      value between 0 to 100 and max is 100. (Defaults to 100)
+   *   offset - Start the list at this offset (zero-based)
+   *   last_update_time - Epoch timestamp. Returns results with last update
+   *      time greater than (that is, more recent than) the specified time.
+   *   domains - A list of domains separated by comma. The domain should be one
+   *      of the following string: flight, hotel, rentalcar, train, boardingpass,
+   *      shipment, contact, purchase, reservation, event, deal, bill. If omited,
+   *      this api will return the sifts with all domains.
+   * }
    */
-  getSifts(username) {
+  getSifts(username, params) {
     let options = {
       method: 'GET',
       path: `/users/${username}/sifts`,
-      params: {},
+      params,
       data: {}
     };
     let args = values(options);

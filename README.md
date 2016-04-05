@@ -48,5 +48,4 @@ gulp watch
 Documentation
 -------------
 
-Work-in-Progress.
-
+You can find the docs [here](https://github.com/agent8/sift-node-sdk/blob/master/docs/API.md)

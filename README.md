@@ -26,7 +26,7 @@ siftapi = new SiftAPI('<API_KEY>', '<API_SECRET>');
 ```javascript
 var SiftAPI = require('siftapi');
 
-siftapi = new SiftAPI.SiftAPI('<API_KEY>', '<API_SECRET>');
+let siftapi = new SiftAPI.SiftAPI('<API_KEY>', '<API_SECRET>');
 ```
 
 Testing

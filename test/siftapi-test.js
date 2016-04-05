@@ -30,21 +30,18 @@ describe('SiftAPI - generateSignature tests', () => {
 
   beforeEach(() => {
     // Initialize with dummy API and Secret to test signature generation
-    siftapi = new SiftAPI(API_KEY, API_SECRET);
+    siftapi = new SiftAPI('123', '123');
   });
 
   it('should generate the correct signature', () => {
-    const path = '/users';
-    const time = 1459805820;
+    const path = '/users/test/sifts';
+    const time = 1459876773;
     const params = {
       ...siftapi._generateParams(time)
     };
-    const data = {
-      username: 'test',
-      locale: 'en_US'
-    };
-    const inpt = siftapi._generateSignature('POST', path, params, data);
-    const output = '591c523f5b112c5e6be4006bafd812d0ec803bff';
+    const data = {};
+    const inpt = siftapi._generateSignature('GET', path, params, data);
+    const output = 'cc8da705abfde50a68cf95a65410cd7c77135bf6';
     expect(inpt).to.be.equal(output);
   });
 

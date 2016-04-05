@@ -43,7 +43,7 @@ gulp watch
 The test suite will be run
 automatically when a write action is performed on the code.
 
-Check out more at the CONTRIBUTING guide.
+Check out more at the [CONTRIBUTING](https://github.com/agent8/sift-node-sdk/blob/master/docs/CONTRIBUTING.MD) guide.
 
 To run the test suite only:
 `gulp test`

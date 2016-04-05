@@ -9,6 +9,15 @@ const API_VERSION = 'v1';
 const URL = `https://api.easilydo.com/${API_VERSION}`;
 
 export default class SiftAPI {
+  /**
+   * @constructor
+   * Initializes the Sift API object with your API key and secret.
+   *
+   * e.g. sift = new SiftAPI('dummyApiKey', 'dummyApiSecret');
+   *
+   * @param {string} apiKey
+   * @param {string} apiSecret
+   */
   constructor(apiKey, apiSecret) {
     this.apiKey = apiKey;
     this.apiSecret = apiSecret;

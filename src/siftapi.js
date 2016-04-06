@@ -110,7 +110,7 @@ export default class SiftAPI {
         email: emlFile.trim()
       }
     };
-    args = values(options);
+    let args = values(options);
     return this._request(...args);
   }
 

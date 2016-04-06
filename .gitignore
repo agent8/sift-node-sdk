@@ -35,3 +35,7 @@ test-dist/
 
 # Sensitive files
 sensitive.js
+
+# Test eml file
+**/*.eml
+

@@ -110,17 +110,17 @@ describe('SiftAPI - API endpoint tests', () => {
       });
   });
 
-  it('should delete a new user', done => {
-      siftapi.deleteUser('test')
-        .then(body => {
-          expect(body.message).to.be.equal('success');
-          expect(body.code).to.be.equal(200);
-          expect(body.result).to.be.equal('deleted');
-          done();
-        }, err => {
-          console.log('Error!');
-          console.log(err);
-        });
-    });
+  it('should delete a user', done => {
+    siftapi.deleteUser('test')
+      .then(body => {
+        expect(body.message).to.be.equal('success');
+        expect(body.code).to.be.equal(200);
+        expect(body.result).to.be.equal('deleted');
+        done();
+      }, err => {
+        console.log('Error!');
+        console.log(err);
+      });
+  });
 });
 

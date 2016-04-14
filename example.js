@@ -4,7 +4,7 @@ import fs from 'fs';
 import SiftAPI from './dist/siftapi';
 
 // Fill in with your own API key and secret
-let sift = new SiftAPI('', '');
+let sift = new SiftAPI('<YOUR API KEY>', '<YOUR API SECRET>');
 
 sift.addUser('test', 'en_US')
   .then(body => {

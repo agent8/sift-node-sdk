@@ -56,7 +56,7 @@ gulp.task('watch', () => {
 
 gulp.task('test', ['babel'], () =>
   gulp.src([config.paths.test.run])
-    .pipe(mocha({ reporter: 'spec' }))
+    .pipe(mocha({ reporter: 'spec', timeout: 5000 }))
     .on('error', err => console.log(err.stack))
 );
 

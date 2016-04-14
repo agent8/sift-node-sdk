@@ -1,10 +1,10 @@
 'use strict';
 
-var fs = require('fs');
-var SiftAPI = require('./dist/siftapi').default;
+import fs from 'fs';
+import SiftAPI from './dist/siftapi';
 
 // Fill in with your own API key and secret
-var sift = new SiftAPI('', '');
+let sift = new SiftAPI('', '');
 
 sift.addUser('test', 'en_US')
   .then(body => {

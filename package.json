@@ -1,6 +1,6 @@
 {
   "name": "siftapi",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "EasilyDo",
   "main": "dist/siftapi.js",
   "description": "A Node.js package for EasilyDo's Sift API.",

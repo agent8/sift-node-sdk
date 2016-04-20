@@ -35,8 +35,11 @@ To see more sample usage, either refer to the [docs](https://github.com/agent8
 Development
 -----------
 
-Rename `sensitive.example.js` to `sensitive.js` and include your `API_KEY` and
+Rename `sensitive.js.example` to `sensitive.js` and include your `API_KEY` and
 `API_SECRET`.
+
+Rename `test-config.js.example` to `test-config.js` and include your email
+account name and refresh token for the test suite to work.
 
 ```
 npm install

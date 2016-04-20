@@ -121,7 +121,7 @@ export default class SiftAPI {
    * @param {string} username - Username of your user
    * @param {string} locale - Locale of the new user, e.g. en_US
    */
-  addUser(username, locale) {
+  addUser(username, locale = 'en_US') {
     let options = {
       method: 'POST',
       path: '/users',

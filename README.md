@@ -29,6 +29,9 @@ var SiftAPI = require('siftapi');
 let siftapi = new SiftAPI.SiftAPI('<API_KEY>', '<API_SECRET>');
 ```
 
+To see more sample usage, either refer to the [docs](https://github.com/agent8
+/sift-node-sdk/blob/master/docs/API.md) or see the test specs.
+
 Development
 -----------
 

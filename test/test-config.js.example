@@ -1,0 +1,2 @@
+module.exports.TEST_GMAIL_ACCOUNT = '<Your email account>';
+module.exports.TEST_GMAIL_REFRESH_TOKEN = '<Your gmail refresh token>';

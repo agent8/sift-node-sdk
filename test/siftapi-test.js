@@ -6,6 +6,7 @@ import {expect} from 'chai';
 
 import SiftAPI from '../dist/siftapi.js';
 import { API_KEY, API_SECRET } from '../sensitive';
+import { TEST_GMAIL_ACCOUNT, TEST_GMAIL_REFRESH_TOKEN } from './test-config';
 
 describe('SiftAPI - initialization tests', () => {
 
@@ -81,6 +82,21 @@ describe('SiftAPI - API endpoint tests', () => {
         expect(body.message).to.be.equal('success');
         expect(body.code).to.be.equal(200);
         expect(body.result.username).to.be.equal('test');
+        done();
+      }, err => {
+        console.log('Error!');
+        console.log(err);
+      });
+  });
+
+  it('should add a new Gmail connection', done => {
+    let params = {
+      account: TEST_GMAIL_ACCOUNT,
+      refresh_token: TEST_GMAIL_REFRESH_TOKEN
+    };
+    siftapi.addEmailConnection('test', 'google', params)
+      .then(body => {
+        expect(body.code).to.be.equal(200);
         done();
       }, err => {
         console.log('Error!');

@@ -1,5 +1,5 @@
 {
-  "name": "sift-node-api",
+  "name": "siftapi",
   "version": "1.0.0",
   "author": "EasilyDo",
   "main": "dist/siftapi.js",

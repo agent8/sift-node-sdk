@@ -179,11 +179,10 @@ export default class SiftAPI {
     let options = {
       method: 'POST',
       path: `/users/${username}/email_connections`,
-      params: {
-        ...emailParams
-      },
+      params: {},
       data: {
-        account_type: accountType
+        account_type: accountType,
+        ...emailParams
       }
     };
     let args = values(options);

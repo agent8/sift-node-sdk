@@ -1,6 +1,6 @@
 {
   "name": "siftapi",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Edison",
   "main": "dist/siftapi.js",
   "description": "A Node.js package for Edison Sift API.",

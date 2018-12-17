@@ -152,12 +152,19 @@ export default class SiftAPI {
    * List all email connections by the user
    *
    * @param {string} username
+   * @param {object} params {
+   *   limit - The maximum number of results to return. Developer can set any
+   *      value between 0 to 100 and max is 100. (Defaults to 100)
+   *   offset - Start the list at this offset (zero-based)
+   *   include_invalid - 1 to include invalid email connection in return
+   *      result, 0 to ignore
+   * }
    */
-  getEmailConnections(username) {
+  getEmailConnections(username, params) {
     let options = {
       method: 'GET',
       path: `/users/${username}/email_connections`,
-      params: {},
+      params,
       data: {}
     };
     let args = values(options);

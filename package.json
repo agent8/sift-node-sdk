@@ -1,13 +1,13 @@
 {
   "name": "siftapi",
   "version": "1.0.4",
-  "author": "EasilyDo",
+  "author": "Edison",
   "main": "dist/siftapi.js",
-  "description": "A Node.js package for EasilyDo's Sift API.",
+  "description": "A Node.js package for Edison Sift API.",
   "contributors": [
     {
       "name": "Bili Xu",
-      "email": "bili@easilydo.com"
+      "email": "bili@edison.tech"
     }
   ],
   "scripts": {

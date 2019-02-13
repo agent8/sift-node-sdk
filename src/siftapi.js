@@ -278,6 +278,113 @@ export default class SiftAPI {
     return this._request(...args);
   }
 
+  getDeveloperEmails(params) {
+    let options = {
+      method: 'GET',
+      path: '/emails',
+      params,
+      data: {}
+    };
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  getUserEmails(username, params) {
+    let options = {
+      method: 'GET',
+      path: `/emails/${username}`,
+      params,
+      data: {}
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  getUserEmail(username, emailId) {
+    let options = {
+      method: 'GET',
+      path: `/emails/${username}/${emailId}`,
+      params: {},
+      data: {}
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  listEmailFilters(params) {
+    let options = {
+      method: 'GET',
+      path: `/filters`,
+      params,
+      data: {}
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  addEmailFilter(description, rules) {
+    const formattedRules = Object.keys(rules)
+      .filter(field => {
+        const predicate = Array.isArray(rules[field])
+        if (!predicate) {
+          console.log(`${field} is not an Array, not included in filter rules`)
+        }
+
+        return predicate
+      })
+      .reduce((prev, curr) => ({
+        ...prev,
+        // Each field should be a JSON string
+        [curr]: JSON.stringify(rules[curr])
+      }), {})
+
+    let options = {
+      method: 'POST',
+      path: '/filters',
+      params: {},
+      data: { description, ...formattedRules }
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  editEmailFilter(filterId, description, rules) {
+    const formattedRules = Object.keys(rules)
+      .filter(field => {
+        const predicate = Array.isArray(rules[field])
+        if (!predicate) {
+          console.log(`${field} is not an Array, not included in filter rules`)
+        }
+
+        return predicate
+      })
+      .reduce((prev, curr) => ({
+        ...prev,
+        // Each field should be a JSON string
+        [curr]: JSON.stringify(rules[curr])
+      }), {})
+
+    let options = {
+      method: 'PUT',
+      path: `/filters/${filterId}`,
+      params: {},
+      data: { description, ...formattedRules }
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
+  deleteEmailFilter(filterId) {
+    let options = {
+      method: 'DELETE',
+      path: `/filters/${filterId}`,
+      params: {},
+      data: {}
+    }
+    let args = values(options)
+    return this._request(...args)
+  }
+
   /**
    * @public
    * Notify EasilyDo of emails that Sift did not parse correctly

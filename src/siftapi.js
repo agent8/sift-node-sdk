@@ -292,7 +292,7 @@ export default class SiftAPI {
   getUserEmails(username, params) {
     let options = {
       method: 'GET',
-      path: `/emails/${username}`,
+      path: `/users/${username}/emails`,
       params,
       data: {}
     }
@@ -314,7 +314,7 @@ export default class SiftAPI {
   listEmailFilters(params) {
     let options = {
       method: 'GET',
-      path: `/filters`,
+      path: `/emails/filters`,
       params,
       data: {}
     }
@@ -340,7 +340,7 @@ export default class SiftAPI {
 
     let options = {
       method: 'POST',
-      path: '/filters',
+      path: '/emails/filters',
       params: {},
       data: { description, ...formattedRules }
     }
@@ -366,7 +366,7 @@ export default class SiftAPI {
 
     let options = {
       method: 'PUT',
-      path: `/filters/${filterId}`,
+      path: `/emails/filters/${filterId}`,
       params: {},
       data: { description, ...formattedRules }
     }
@@ -377,7 +377,7 @@ export default class SiftAPI {
   deleteEmailFilter(filterId) {
     let options = {
       method: 'DELETE',
-      path: `/filters/${filterId}`,
+      path: `/emails/filters/${filterId}`,
       params: {},
       data: {}
     }

@@ -303,7 +303,7 @@ export default class SiftAPI {
   getUserEmail(username, emailId) {
     let options = {
       method: 'GET',
-      path: `/emails/${username}/${emailId}`,
+      path: `/users/${username}/emails/${emailId}`,
       params: {},
       data: {}
     }

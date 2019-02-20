@@ -1,6 +1,6 @@
 'use strict';
 
-import crypto from 'crypto';
+import hmacSHA1 from 'crypto-js/hmac-sha1';
 import request from 'request-promise';
 
 import { sortObj, buildUrl, values } from './utils';
@@ -50,7 +50,6 @@ export default class SiftAPI {
    * @param {object} data - Body parameters
    */
   _generateSignature(method, path, params, data) {
-    let hmac = crypto.createHmac('sha1', this.apiSecret);
     let baseString = `${method.toUpperCase()}&/${API_VERSION}${path}`;
     let p = {
       ...params,
@@ -61,8 +60,7 @@ export default class SiftAPI {
       baseString += `&${item}=${p[item]}`;
     }
 
-    let baseStringBuffer = new Buffer(baseString, 'utf-8');
-    return hmac.update(baseStringBuffer).digest('hex');
+    return hmacSHA1(baseString, this.apiSecret).toString();
   }
 
   /**

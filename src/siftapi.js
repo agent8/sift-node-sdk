@@ -311,7 +311,7 @@ export default class SiftAPI {
     return this._request(...args)
   }
 
-  listEmailFilters(params) {
+  getEmailFilters(params) {
     let options = {
       method: 'GET',
       path: `/emails/filters`,

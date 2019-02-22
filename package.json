@@ -10,10 +10,6 @@
       "email": "bili@edison.tech"
     }
   ],
-  "scripts": {
-    "test": "node node_modules/.bin/mocha --reporter spec test-dist/* --timeout 5000",
-    "examples": "node node_modules/.bin/babel-node example.js"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com/agent8:sift-node-sdk.git"

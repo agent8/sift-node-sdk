@@ -1,7 +1,6 @@
-'use strict';
-
+import qs from 'qs';
+import fetch from 'isomorphic-fetch';
 import hmacSHA1 from 'crypto-js/hmac-sha1';
-import request from 'axios';
 
 import { sortObj, buildUrl, values } from './utils';
 
@@ -56,9 +55,9 @@ export default class SiftAPI {
       ...data
     };
 
-    for (let item in sortObj(p)) {
-      baseString += `&${item}=${p[item]}`;
-    }
+    baseString += Object.keys(p).sort().reduce((prev, curr) => {
+      return `${prev}&${curr}=${p[curr]}`
+    }, '')
 
     return hmacSHA1(baseString, this.apiSecret).toString();
   }
@@ -74,20 +73,26 @@ export default class SiftAPI {
    */
   _request(method, path, params = {}, data = {}) {
     let url = buildUrl(URL, path);
-    let qs = {
+    let queryParams = {
       ...params,
       ...this._generateParams()
     };
-    qs.signature = this._generateSignature(method, path, qs, data);
+    queryParams.signature = this._generateSignature(method, path, queryParams, data);
 
     let options = {
-      method: method,
-      url,
-      params: qs,
-      data: data
+      method,
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     };
 
-    return request(options)
+    if (method !== 'GET') {
+      options.body = qs.stringify(data)
+    }
+
+    return fetch(`${url}?${qs.stringify(queryParams)}`, options)
+      .then(res => res.json())
   }
 
   /**

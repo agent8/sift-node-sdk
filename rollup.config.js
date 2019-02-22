@@ -18,7 +18,7 @@ export default {
   plugins: [
     json(),
     commonjs(),
-    resolve(),
+    resolve({ preferBuiltins: true }),
     babel({
       exclude: 'node_modules/**' // only transpile our source code
     })

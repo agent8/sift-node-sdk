@@ -1,11 +1,11 @@
-import qs from 'qs';
-import fetch from 'isomorphic-fetch';
-import hmacSHA1 from 'crypto-js/hmac-sha1';
+import qs from 'qs'
+import fetch from 'isomorphic-fetch'
+import hmacSHA1 from 'crypto-js/hmac-sha1'
 
-import { sortObj, buildUrl, values } from './utils';
+import { sortObj, buildUrl, values } from './utils'
 
-const API_VERSION = 'v1';
-const URL = `https://api.easilydo.com/${API_VERSION}`;
+const API_VERSION = 'v1'
+const URL = `https://api.easilydo.com/${API_VERSION}`
 
 export default class SiftAPI {
   /**
@@ -18,8 +18,8 @@ export default class SiftAPI {
    * @param {string} apiSecret
    */
   constructor(apiKey, apiSecret) {
-    this.apiKey = apiKey;
-    this.apiSecret = apiSecret;
+    this.apiKey = apiKey
+    this.apiSecret = apiSecret
   }
 
   /**
@@ -28,14 +28,12 @@ export default class SiftAPI {
    *
    * @param {integer} timestamp - Unixtime, defaults to the time now
    */
-  _generateParams(
-    timestamp = Math.floor(Date.now() / 1000)
-  ) {
+  _generateParams(timestamp = Math.floor(Date.now() / 1000)) {
     let result = {
       api_key: this.apiKey,
-      timestamp
-    };
-    return result;
+      timestamp,
+    }
+    return result
   }
 
   /**
@@ -49,17 +47,19 @@ export default class SiftAPI {
    * @param {object} data - Body parameters
    */
   _generateSignature(method, path, params, data) {
-    let baseString = `${method.toUpperCase()}&/${API_VERSION}${path}`;
+    let baseString = `${method.toUpperCase()}&/${API_VERSION}${path}`
     let p = {
       ...params,
-      ...data
-    };
+      ...data,
+    }
 
-    baseString += Object.keys(p).sort().reduce((prev, curr) => {
-      return `${prev}&${curr}=${p[curr]}`
-    }, '')
+    baseString += Object.keys(p)
+      .sort()
+      .reduce((prev, curr) => {
+        return `${prev}&${curr}=${p[curr]}`
+      }, '')
 
-    return hmacSHA1(baseString, this.apiSecret).toString();
+    return hmacSHA1(baseString, this.apiSecret).toString()
   }
 
   /**
@@ -72,27 +72,33 @@ export default class SiftAPI {
    * @param {object} data - Body parameters
    */
   _request(method, path, params = {}, data = {}) {
-    let url = buildUrl(URL, path);
+    let url = buildUrl(URL, path)
     let queryParams = {
       ...params,
-      ...this._generateParams()
-    };
-    queryParams.signature = this._generateSignature(method, path, queryParams, data);
+      ...this._generateParams(),
+    }
+    queryParams.signature = this._generateSignature(
+      method,
+      path,
+      queryParams,
+      data
+    )
 
     let options = {
       method,
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    };
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }
 
     if (method !== 'GET') {
       options.body = qs.stringify(data)
     }
 
-    return fetch(`${url}?${qs.stringify(queryParams)}`, options)
-      .then(res => res.json())
+    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res =>
+      res.json()
+    )
   }
 
   /**
@@ -107,11 +113,11 @@ export default class SiftAPI {
       path: '/discovery',
       params: {},
       data: {
-        email: emlFile.trim()
-      }
-    };
-    let args = values(options);
-    return this._request(...args);
+        email: emlFile.trim(),
+      },
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -126,10 +132,10 @@ export default class SiftAPI {
       method: 'POST',
       path: '/users',
       params: {},
-      data: { username, locale }
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: { username, locale },
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -143,10 +149,10 @@ export default class SiftAPI {
       method: 'DELETE',
       path: `/users/${username}`,
       params: {},
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -167,10 +173,10 @@ export default class SiftAPI {
       method: 'GET',
       path: `/users/${username}/email_connections`,
       params,
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -189,11 +195,11 @@ export default class SiftAPI {
       params: {},
       data: {
         account_type: accountType,
-        ...emailParams
-      }
-    };
-    let args = values(options);
-    return this._request(...args);
+        ...emailParams,
+      },
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -208,10 +214,10 @@ export default class SiftAPI {
       method: 'DELETE',
       path: `/users/${username}/email_connections/${connectionId}`,
       params: {},
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -236,10 +242,10 @@ export default class SiftAPI {
       method: 'GET',
       path: `/users/${username}/sifts`,
       params,
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -257,10 +263,10 @@ export default class SiftAPI {
       method: 'GET',
       path: `/users/${username}/sifts/${siftId}`,
       params,
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   /**
@@ -274,10 +280,10 @@ export default class SiftAPI {
       method: 'POST',
       path: `/connect_token`,
       params: { username },
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 
   getDeveloperEmails(params) {
@@ -285,8 +291,8 @@ export default class SiftAPI {
       method: 'GET',
       path: '/emails',
       params,
-      data: {}
-    };
+      data: {},
+    }
     let args = values(options)
     return this._request(...args)
   }
@@ -296,7 +302,7 @@ export default class SiftAPI {
       method: 'GET',
       path: `/users/${username}/emails`,
       params,
-      data: {}
+      data: {},
     }
     let args = values(options)
     return this._request(...args)
@@ -307,7 +313,7 @@ export default class SiftAPI {
       method: 'GET',
       path: `/users/${username}/emails/${emailId}`,
       params: {},
-      data: {}
+      data: {},
     }
     let args = values(options)
     return this._request(...args)
@@ -318,7 +324,7 @@ export default class SiftAPI {
       method: 'GET',
       path: `/emails/filters`,
       params,
-      data: {}
+      data: {},
     }
     let args = values(options)
     return this._request(...args)
@@ -334,17 +340,20 @@ export default class SiftAPI {
 
         return predicate
       })
-      .reduce((prev, curr) => ({
-        ...prev,
-        // Each field should be a JSON string
-        [curr]: JSON.stringify(rules[curr])
-      }), {})
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          // Each field should be a JSON string
+          [curr]: JSON.stringify(rules[curr]),
+        }),
+        {}
+      )
 
     let options = {
       method: 'POST',
       path: '/emails/filters',
       params: {},
-      data: { description, ...formattedRules }
+      data: { description, ...formattedRules },
     }
     let args = values(options)
     return this._request(...args)
@@ -360,17 +369,20 @@ export default class SiftAPI {
 
         return predicate
       })
-      .reduce((prev, curr) => ({
-        ...prev,
-        // Each field should be a JSON string
-        [curr]: JSON.stringify(rules[curr])
-      }), {})
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          // Each field should be a JSON string
+          [curr]: JSON.stringify(rules[curr]),
+        }),
+        {}
+      )
 
     let options = {
       method: 'PUT',
       path: `/emails/filters/${filterId}`,
       params: {},
-      data: { description, ...formattedRules }
+      data: { description, ...formattedRules },
     }
     let args = values(options)
     return this._request(...args)
@@ -381,7 +393,7 @@ export default class SiftAPI {
       method: 'DELETE',
       path: `/emails/filters/${filterId}`,
       params: {},
-      data: {}
+      data: {},
     }
     let args = values(options)
     return this._request(...args)
@@ -402,12 +414,11 @@ export default class SiftAPI {
       params: {
         email,
         locale,
-        timezone
+        timezone,
       },
-      data: {}
-    };
-    let args = values(options);
-    return this._request(...args);
+      data: {},
+    }
+    let args = values(options)
+    return this._request(...args)
   }
 }
-

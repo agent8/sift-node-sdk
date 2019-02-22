@@ -10,6 +10,10 @@
       "email": "bili@edison.tech"
     }
   ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com/agent8:sift-node-sdk.git"
@@ -21,10 +25,15 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.3.1",
     "chai": "^3.4.1",
     "del": "^2.2.0",
     "jshint": "^2.9.1",
     "mocha": "^2.3.4",
+    "rollup": "^1.2.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "run-sequence": "^1.1.5"
   },
   "engine": "node >= 0.10.x",

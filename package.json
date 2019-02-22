@@ -32,7 +32,6 @@
   "bugs": {
     "url": "https://github.com/agent8/sift-node-sdk/issues"
   },
-  "private": false,
   "license": "MIT",
   "dependencies": {
     "crypto": "0.0.3",

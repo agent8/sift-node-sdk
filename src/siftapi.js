@@ -1,7 +1,7 @@
 'use strict';
 
 import hmacSHA1 from 'crypto-js/hmac-sha1';
-import request from 'request-promise';
+import request from 'axios';
 
 import { sortObj, buildUrl, values } from './utils';
 
@@ -82,10 +82,9 @@ export default class SiftAPI {
 
     let options = {
       method: method,
-      uri: url,
-      json: true,
-      qs,
-      form: data
+      url,
+      params: qs,
+      data: data
     };
 
     return request(options)

@@ -1,6 +1,6 @@
 {
   "name": "siftapi",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "author": "Edison",
   "main": "dist/siftapi.js",
   "module": "dist/siftapi.es6.js",

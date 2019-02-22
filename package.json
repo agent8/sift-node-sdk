@@ -3,6 +3,7 @@
   "version": "1.1.2",
   "author": "Edison",
   "main": "dist/siftapi.js",
+  "module": "dist/siftapi.es6.js",
   "description": "A Node.js package for Edison Sift API.",
   "contributors": [
     {
@@ -12,7 +13,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c --watch"
+    "dev": "rollup -c --watch",
+    "prepublish": "yarn build"
   },
   "repository": {
     "type": "git",

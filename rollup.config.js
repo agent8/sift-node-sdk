@@ -5,10 +5,16 @@ import json from 'rollup-plugin-json';
 
 export default {
   input: 'src/siftapi.js',
-  output: {
-    file: 'dist/siftapi.js',
-    format: 'cjs'
-  },
+  output: [
+    {
+      file: 'dist/siftapi.js',
+      format: 'cjs'
+    },
+    {
+      file: 'dist/siftapi.es6.js',
+      format: 'esm'
+    }
+  ],
   plugins: [
     json(),
     commonjs(),

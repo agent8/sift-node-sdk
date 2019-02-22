@@ -28,7 +28,7 @@ export default class SiftAPI {
    * @param {integer} timestamp - Unixtime, defaults to the time now
    * @return {object} - object that includes common parameters
    */
-  _generateParams(timestamp = Math.floor(Date.now() / 1000)) {
+  generateParams(timestamp = Math.floor(Date.now() / 1000)) {
     const result = {
       api_key: this.apiKey,
       timestamp,
@@ -47,7 +47,7 @@ export default class SiftAPI {
    * @param {object} data - Body parameters
    * @return {object} - signature string for Sift API requests
    */
-  _generateSignature(method, path, params, data) {
+  generateSignature(method, path, params, data) {
     let baseString = `${method.toUpperCase()}&/${API_VERSION}${path}`;
     const p = {
       ...params,
@@ -56,9 +56,7 @@ export default class SiftAPI {
 
     baseString += Object.keys(p)
       .sort()
-      .reduce((prev, curr) => {
-        return `${prev}&${curr}=${p[curr]}`;
-      }, '');
+      .reduce((prev, curr) => `${prev}&${curr}=${p[curr]}`, '');
 
     return hmacSHA1(baseString, this.apiSecret).toString();
   }
@@ -73,17 +71,17 @@ export default class SiftAPI {
    * @param {object} data - Body parameters
    * @return {Promise} - Promise to be resolved by client
    */
-  _request(method, path, params = {}, data = {}) {
+  request(method, path, params = {}, data = {}) {
     const url = buildUrl(URL, path);
     const queryParams = {
       ...params,
-      ...this._generateParams(),
+      ...this.generateParams(),
     };
-    queryParams.signature = this._generateSignature(
+    queryParams.signature = this.generateSignature(
       method,
       path,
       queryParams,
-      data
+      data,
     );
 
     const options = {
@@ -98,9 +96,7 @@ export default class SiftAPI {
       options.body = qs.stringify(data);
     }
 
-    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res =>
-      res.json()
-    );
+    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res => res.json());
   }
 
   /**
@@ -120,7 +116,7 @@ export default class SiftAPI {
       },
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -139,7 +135,7 @@ export default class SiftAPI {
       data: { username, locale },
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -157,7 +153,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -182,7 +178,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -206,7 +202,7 @@ export default class SiftAPI {
       },
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -225,7 +221,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -254,7 +250,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -276,7 +272,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -289,12 +285,12 @@ export default class SiftAPI {
   getConnectToken(username) {
     const options = {
       method: 'POST',
-      path: `/connect_token`,
+      path: '/connect_token',
       params: { username },
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   getDeveloperEmails(params) {
@@ -305,7 +301,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   getUserEmails(username, params) {
@@ -316,7 +312,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   getUserEmail(username, emailId) {
@@ -327,27 +323,27 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   getEmailFilters(params) {
     const options = {
       method: 'GET',
-      path: `/emails/filters`,
+      path: '/emails/filters',
       params,
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   addEmailFilter(description, rules) {
     const formattedRules = Object.keys(rules)
-      .filter(field => {
+      .filter((field) => {
         const predicate = Array.isArray(rules[field]);
         if (!predicate) {
           console.warn(
-            `${field} is not an Array, not included in filter rules`
+            `${field} is not an Array, not included in filter rules`,
           );
         }
 
@@ -359,7 +355,7 @@ export default class SiftAPI {
           // Each field should be a JSON string
           [curr]: JSON.stringify(rules[curr]),
         }),
-        {}
+        {},
       );
 
     const options = {
@@ -369,16 +365,16 @@ export default class SiftAPI {
       data: { description, ...formattedRules },
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   editEmailFilter(filterId, description, rules) {
     const formattedRules = Object.keys(rules)
-      .filter(field => {
+      .filter((field) => {
         const predicate = Array.isArray(rules[field]);
         if (!predicate) {
           console.warn(
-            `${field} is not an Array, not included in filter rules`
+            `${field} is not an Array, not included in filter rules`,
           );
         }
 
@@ -390,7 +386,7 @@ export default class SiftAPI {
           // Each field should be a JSON string
           [curr]: JSON.stringify(rules[curr]),
         }),
-        {}
+        {},
       );
 
     const options = {
@@ -400,7 +396,7 @@ export default class SiftAPI {
       data: { description, ...formattedRules },
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   deleteEmailFilter(filterId) {
@@ -411,7 +407,7 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 
   /**
@@ -426,7 +422,7 @@ export default class SiftAPI {
   postFeedback(email, locale, timezone) {
     const options = {
       method: 'POST',
-      path: `/feedback`,
+      path: '/feedback',
       params: {
         email,
         locale,
@@ -435,6 +431,6 @@ export default class SiftAPI {
       data: {},
     };
     const args = values(options);
-    return this._request(...args);
+    return this.request(...args);
   }
 }

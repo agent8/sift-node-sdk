@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "google",
-  ],
+  "extends": ["airbnb"],
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module",
@@ -13,8 +10,6 @@
     "node": true,
   },
   "rules": {
-    "no-console": ["warn", { allow: ["warn", "error"] }],
-    "max-len": "off",
-    "require-jsdoc": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
   }
 }

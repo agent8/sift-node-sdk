@@ -2,7 +2,7 @@ import qs from 'qs';
 import fetch from 'isomorphic-fetch';
 import hmacSHA1 from 'crypto-js/hmac-sha1';
 
-import {buildUrl, values} from './utils';
+import { buildUrl, values } from './utils';
 
 const API_VERSION = 'v1';
 const URL = `https://api.easilydo.com/${API_VERSION}`;
@@ -55,10 +55,10 @@ export default class SiftAPI {
     };
 
     baseString += Object.keys(p)
-        .sort()
-        .reduce((prev, curr) => {
-          return `${prev}&${curr}=${p[curr]}`;
-        }, '');
+      .sort()
+      .reduce((prev, curr) => {
+        return `${prev}&${curr}=${p[curr]}`;
+      }, '');
 
     return hmacSHA1(baseString, this.apiSecret).toString();
   }
@@ -80,10 +80,10 @@ export default class SiftAPI {
       ...this._generateParams(),
     };
     queryParams.signature = this._generateSignature(
-        method,
-        path,
-        queryParams,
-        data
+      method,
+      path,
+      queryParams,
+      data
     );
 
     const options = {
@@ -98,7 +98,7 @@ export default class SiftAPI {
       options.body = qs.stringify(data);
     }
 
-    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then((res) =>
+    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res =>
       res.json()
     );
   }
@@ -136,7 +136,7 @@ export default class SiftAPI {
       method: 'POST',
       path: '/users',
       params: {},
-      data: {username, locale},
+      data: { username, locale },
     };
     const args = values(options);
     return this._request(...args);
@@ -290,7 +290,7 @@ export default class SiftAPI {
     const options = {
       method: 'POST',
       path: `/connect_token`,
-      params: {username},
+      params: { username },
       data: {},
     };
     const args = values(options);
@@ -343,28 +343,30 @@ export default class SiftAPI {
 
   addEmailFilter(description, rules) {
     const formattedRules = Object.keys(rules)
-        .filter((field) => {
-          const predicate = Array.isArray(rules[field]);
-          if (!predicate) {
-            console.warn(`${field} is not an Array, not included in filter rules`);
-          }
+      .filter(field => {
+        const predicate = Array.isArray(rules[field]);
+        if (!predicate) {
+          console.warn(
+            `${field} is not an Array, not included in filter rules`
+          );
+        }
 
-          return predicate;
-        })
-        .reduce(
-            (prev, curr) => ({
-              ...prev,
-              // Each field should be a JSON string
-              [curr]: JSON.stringify(rules[curr]),
-            }),
-            {}
-        );
+        return predicate;
+      })
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          // Each field should be a JSON string
+          [curr]: JSON.stringify(rules[curr]),
+        }),
+        {}
+      );
 
     const options = {
       method: 'POST',
       path: '/emails/filters',
       params: {},
-      data: {description, ...formattedRules},
+      data: { description, ...formattedRules },
     };
     const args = values(options);
     return this._request(...args);
@@ -372,28 +374,30 @@ export default class SiftAPI {
 
   editEmailFilter(filterId, description, rules) {
     const formattedRules = Object.keys(rules)
-        .filter((field) => {
-          const predicate = Array.isArray(rules[field]);
-          if (!predicate) {
-            console.warn(`${field} is not an Array, not included in filter rules`);
-          }
+      .filter(field => {
+        const predicate = Array.isArray(rules[field]);
+        if (!predicate) {
+          console.warn(
+            `${field} is not an Array, not included in filter rules`
+          );
+        }
 
-          return predicate;
-        })
-        .reduce(
-            (prev, curr) => ({
-              ...prev,
-              // Each field should be a JSON string
-              [curr]: JSON.stringify(rules[curr]),
-            }),
-            {}
-        );
+        return predicate;
+      })
+      .reduce(
+        (prev, curr) => ({
+          ...prev,
+          // Each field should be a JSON string
+          [curr]: JSON.stringify(rules[curr]),
+        }),
+        {}
+      );
 
     const options = {
       method: 'PUT',
       path: `/emails/filters/${filterId}`,
       params: {},
-      data: {description, ...formattedRules},
+      data: { description, ...formattedRules },
     };
     const args = values(options);
     return this._request(...args);

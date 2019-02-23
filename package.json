@@ -14,7 +14,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
-    "prepublish": "yarn build"
+    "prepublish": "yarn build",
+    "post-install": "yarn build"
   },
   "repository": {
     "type": "git",

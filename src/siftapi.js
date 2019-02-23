@@ -81,7 +81,7 @@ export default class SiftAPI {
       method,
       path,
       queryParams,
-      data,
+      data
     );
 
     const options = {
@@ -96,7 +96,9 @@ export default class SiftAPI {
       options.body = qs.stringify(data);
     }
 
-    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res => res.json());
+    return fetch(`${url}?${qs.stringify(queryParams)}`, options).then(res =>
+      res.json()
+    );
   }
 
   /**
@@ -339,11 +341,11 @@ export default class SiftAPI {
 
   addEmailFilter(description, rules) {
     const formattedRules = Object.keys(rules)
-      .filter((field) => {
+      .filter(field => {
         const predicate = Array.isArray(rules[field]);
         if (!predicate) {
           console.warn(
-            `${field} is not an Array, not included in filter rules`,
+            `${field} is not an Array, not included in filter rules`
           );
         }
 
@@ -355,7 +357,7 @@ export default class SiftAPI {
           // Each field should be a JSON string
           [curr]: JSON.stringify(rules[curr]),
         }),
-        {},
+        {}
       );
 
     const options = {
@@ -370,11 +372,11 @@ export default class SiftAPI {
 
   editEmailFilter(filterId, description, rules) {
     const formattedRules = Object.keys(rules)
-      .filter((field) => {
+      .filter(field => {
         const predicate = Array.isArray(rules[field]);
         if (!predicate) {
           console.warn(
-            `${field} is not an Array, not included in filter rules`,
+            `${field} is not an Array, not included in filter rules`
           );
         }
 
@@ -386,7 +388,7 @@ export default class SiftAPI {
           // Each field should be a JSON string
           [curr]: JSON.stringify(rules[curr]),
         }),
-        {},
+        {}
       );
 
     const options = {

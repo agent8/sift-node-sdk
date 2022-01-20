@@ -39,7 +39,7 @@
     "run-sequence": "^1.1.5"
   },
   "engine": "node >= 0.10.x",
-  "homepage": "https://sift.easilydo.com",
+  "homepage": "https://developer.edison.tech",
   "bugs": {
     "url": "https://github.com/agent8/sift-node-sdk/issues"
   },
